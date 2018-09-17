@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Cocogoose';
+  src: url("../fonts/COCOGOOSE-PRO.SEMILIGHT.ttf");
+}
+
+body {
+  margin: 0;
+  background-image: url("../images/b_body.jpg");
+  font-family: "Noto Serif JP", "Times New Roman", Times, serif;
+}
+
+header {  
+  /* background-image: url("../images/philly.jpg"); */
+  background-color: rgba(226, 62, 30, 0.9);
+  background-position: 0 100px;
+  height: 70px;
+  /* margin-top: 3rem; */
+  box-shadow: 0 2px 5px grey;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 199 !important;
+}
+
+#header-name {
+  font-size: 2rem;
+  font-family: "Cocogoose", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+  color: white;
+  text-shadow: 0 1px 2px black;
+  letter-spacing: 1vw;
+}
+
+.logo {
+  position: fixed;
+  left: 1vw;
+  top: 1vw;
+  width: 120px;
+  z-index: 200 !important;
+  /* opacity: 0.9; */
+}
+
+main {
+  margin-top: 7rem;
+}
+
+.description {
+  font-size: 0.9rem;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.card {
+  border: none;
+  margin: 1rem;
+  box-shadow: 0 2px 5px grey;
+}
+
+.btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.footer {
+  background-color: rgb(226, 62, 30);
+  color: white;
+  opacity: 0.9;
+}
+
+i {
+  /* color: rgb(226, 62, 30); */
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 0.7rem;
+}
+
+.footer p {
+  font-size: 0.6rem;
+  margin-bottom: 10px;
+  /* color: rgb(226, 62, 30); */
+}
+
+.footer .card-body {
+  padding: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media only screen and (max-width: 750px) {
+  .logo {
+    display: none;
+  }
+
+  #header-name {
+    font-size: 6vw;
+  }
+}
