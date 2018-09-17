@@ -17,6 +17,10 @@ var AtricleSchema = new Schema({
      type: String,
      required: true
    },
+   picture: {
+     type: String,
+     required: true
+   },
    comment: {
      type: Schema.Types.ObjectId,
      ref: "Comment"

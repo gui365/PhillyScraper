@@ -9,7 +9,12 @@
 <main>
   <div class="container">
     <div class="row justify-content-center">
-      {{#each articles}}
+      <a href="/scrape" class="btn btn-primary scrape-btn">
+      Get new articles and refresh
+      </a>
+    </div>
+    <div class="row justify-content-center">
+      {{#each dbArticles}}
         <div class="card justify-content-center" style="width: 18rem;">
           <div class="card-img-top" style="{{this.picture}}; height: 200px; background-size: cover;" alt="Event image"></div>
           <div class="card-body">

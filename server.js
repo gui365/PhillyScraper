@@ -34,11 +34,17 @@ app.set("view engine", "handlebars");
 mongoose.connect("mongodb://localhost/phillyscraperdb", { useNewUrlParser: true });
 
 app.get("/", function(req, res) {
-  res.render("index");
+  // should be something like: db.Article.find({}).then(function(results){render})
+  db.Article.find({}).then(function(dbArticles){
+    res.render("index", { dbArticles: dbArticles });
+    console.log(dbArticles);
+  }).catch(function(err) {
+    console.log(err);
+  })
 })
 
 app.get("/scrape", function(req, res) {
-  var results = {articles: []};
+  // var results = {articles: []};
   
   axios.get("https://www.uwishunu.com/").then(function(response) {
     var $ = cheerio.load(response.data);
@@ -51,20 +57,32 @@ app.get("/scrape", function(req, res) {
       var link = $(element).find(".entry-title").find("a").attr("href");
       var description = $(element).find(".entry-content p").text();
       var picture = $(element).find(".featured-image-as-background").attr("style");
+      // console.log(picture);
 
       if (title && link && description && picture) {
         result.title = title;
         result.link = link;
         result.description = description;
         result.picture = picture;
-        results.articles.push(result);
+        // results.articles.push(result);
         
-        db.Article.create(result).then(function(article) {
-            console.log(article);
-          })
-          .catch(function(err) {
-            return res.json(err);
-          });
+        // Check if the document already exists in the collection
+        db.Article.findOne({title: result.title}, function(err, theone) {
+          // console.log(theone);
+          if (theone === null) {
+            // If it doesn't, add it to the collection
+            db.Article.create(result).then(function(article) {
+                console.log(article);
+              })
+              .catch(function(err) {
+                console.log(err);
+              });
+          } else {
+            // If it does, don't add it again to the DB
+            console.log("Article already exists in DB");
+          }
+        });
+
       } else {
         console.log("Incomplete entry");
       };
@@ -73,8 +91,12 @@ app.get("/scrape", function(req, res) {
 
     // console.log(results);
     
-  }).then(function(loadedArticles) {
-    res.render("index", results);
+  })
+  .then(function(nextStep) {
+    res.redirect("/");
+  })
+  .catch(function(err) {
+    console.log(err);
   });
   
 });

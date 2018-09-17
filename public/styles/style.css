@@ -41,7 +41,12 @@ header {
 }
 
 main {
-  margin-top: 7rem;
+  margin-top: 6rem;
+}
+
+.scrape-btn {
+  margin-bottom: 1rem;
+  font-size: 1.5rem !important;
 }
 
 .description {
