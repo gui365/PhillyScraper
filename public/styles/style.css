@@ -39,7 +39,8 @@ main {
   margin-top: 6rem;
 }
 
-.scrape-btn {
+.scrape-btn, .delete-btn {
+  color: white !important;
   margin-bottom: 1rem;
   font-size: 1.5rem !important;
 }
@@ -62,6 +63,7 @@ main {
   font-size: 0.8rem;
   font-weight: 700;
   box-shadow: 0 2px 5px rgba(141, 141, 141, 0.9);
+  margin: 0 1rem;
 }
 
 .comments {

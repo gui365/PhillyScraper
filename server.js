@@ -34,7 +34,6 @@ app.set("view engine", "handlebars");
 mongoose.connect("mongodb://localhost/phillyscraperdb", { useNewUrlParser: true });
 
 app.get("/", function(req, res) {
-  // should be something like: db.Article.find({}).then(function(results){render})
   db.Article.find({}).then(function(dbArticles){
     res.render("index", { dbArticles: dbArticles });
     console.log(dbArticles);
@@ -44,9 +43,7 @@ app.get("/", function(req, res) {
 })
 
 app.get("/scrape", function(req, res) {
-  // res.render("loading");
   // var results = {articles: []};
-  
   axios.get("https://www.uwishunu.com/").then(function(response) {
     var $ = cheerio.load(response.data);
     
@@ -92,7 +89,7 @@ app.get("/scrape", function(req, res) {
 
     // console.log("ALL DONE!");
   })
-  .then(function(something) {
+  .then(function() {
     // console.log(something);
     res.redirect("/");
   })
@@ -124,6 +121,15 @@ app.post("/articles/:articleId", function(req, res) {
     res.json(err);
   })
 });
+
+app.delete("/delete", function(req, res) {
+  db.Article.deleteMany({}, function(err){
+    if (err) {
+      console.log();
+    }
+    // res.redirect("/");
+  });
+})
 
 app.listen(PORT, function() {
   console.log("App running on port " + PORT);

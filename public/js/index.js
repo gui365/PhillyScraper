@@ -51,4 +51,11 @@ $(document).ready(function(){
     })
   });
 
+  $(".delete-btn").on("click", function() {
+    $.ajax("/delete", {
+      type: "DELETE"
+    })
+    window.location.reload();
+  })
+
 });
