@@ -1,3 +1,15 @@
+if ($(".articles").children().length === 0) {
+  $("#logo-big").show()
+} else {
+  $("#logo-big").hide()
+}
+
+if ($(".articles").children().length === 0) {
+  $(".logo").hide()
+} else {
+  $(".logo").show()
+}
+
 $(document).ready(function(){
   
   // OPEN MODAL AND SHOW COMMENT IF EXISTS

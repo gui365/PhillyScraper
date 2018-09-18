@@ -23,12 +23,7 @@ header {
 }
 
 #header-name {
-  font-size: 2rem;
-  font-family: "Cocogoose", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin: 0;
-  color: white;
-  text-shadow: 0 1px 2px black;
-  letter-spacing: 1vw;
+  display: none;
 }
 
 .logo {
@@ -117,6 +112,12 @@ i {
   }
 
   #header-name {
+    display: block;
     font-size: 6vw;
+    font-family: "Cocogoose", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    margin: 0;
+    color: white;
+    text-shadow: 0 1px 2px black;
+    letter-spacing: 1vw;
   }
 }
