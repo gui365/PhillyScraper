@@ -1,4 +1,4 @@
-<img alt="Philly Scraper Heading Logo" src="./public/assets/images/heading_logo_sm.png"><br>
+<img alt="Philly Scraper Heading Logo" src="./public/images/heading_logo_sm.png"><br>
 
 This project was the homework for week 18 of the Penn Coding Boot Camp.
 
