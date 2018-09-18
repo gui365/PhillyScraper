@@ -44,6 +44,7 @@ app.get("/", function(req, res) {
 })
 
 app.get("/scrape", function(req, res) {
+  // res.render("loading");
   // var results = {articles: []};
   
   axios.get("https://www.uwishunu.com/").then(function(response) {
@@ -67,9 +68,9 @@ app.get("/scrape", function(req, res) {
         // results.articles.push(result);
         
         // Check if the document already exists in the collection
-        db.Article.findOne({title: result.title}, function(err, theone) {
-          // console.log(theone);
-          if (theone === null) {
+        // db.Article.findOne({title: result.title}, function(err, theone) {
+        //   // console.log(theone);
+        //   if (theone === null) {
             // If it doesn't, add it to the collection
             db.Article.create(result).then(function(article) {
                 console.log(article);
@@ -77,11 +78,11 @@ app.get("/scrape", function(req, res) {
               .catch(function(err) {
                 console.log(err);
               });
-          } else {
-            // If it does, don't add it again to the DB
-            console.log("Article already exists in DB");
-          }
-        });
+          // } else {
+          //   // If it does, don't add it again to the DB
+          //   console.log("Article already exists in DB");
+          // }
+        // });
 
       } else {
         console.log("Incomplete entry");
@@ -89,16 +90,39 @@ app.get("/scrape", function(req, res) {
 
     });
 
-    // console.log(results);
-    
+    // console.log("ALL DONE!");
   })
-  .then(function(nextStep) {
+  .then(function(something) {
+    // console.log(something);
     res.redirect("/");
   })
   .catch(function(err) {
     console.log(err);
   });
-  
+});
+
+app.get("/articles/:articleId", function(req, res) {
+  db.Article.findOne({ _id: req.params.articleId })
+  .populate("comment")
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function (err) {
+    res.json(err);
+  })
+});
+
+app.post("/articles/:articleId", function(req, res) {
+  db.Comment.create(req.body)
+  .then(function(dbComment) {
+    return db.Article.findOneAndUpdate({ _id: req.params.articleId }, { comment : dbComment._id}, { new: true });
+  })
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function (err) {
+    res.json(err);
+  })
 });
 
 app.listen(PORT, function() {

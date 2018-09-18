@@ -3,10 +3,6 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
-   title: {
-     type: String,
-     trim: true
-   },
    body: String,
    date: Date
 });

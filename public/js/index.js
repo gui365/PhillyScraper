@@ -1,0 +1,42 @@
+$(document).ready(function(){
+  
+  // OPEN MODAL AND SHOW COMMENT IF EXISTS
+  $(".comments").on("click", function() {
+    $("#comment-body").val("");
+    var articleId = $(this).attr("data-id");
+    $(".article-id").text(articleId);
+
+    $.ajax({
+      method: "GET",
+      url: `/articles/${articleId}`
+    })
+    .then(function(articleData){
+      // console.log(articleData);
+      $(".modal-title").text(articleData.title);
+      if (articleData.comment) {
+        $("#comment-body").val(articleData.comment.body);
+      }
+      $("#modal-comment").click();
+    })
+  });
+
+  // SAVE COMMENT
+  $(".save-comment").on("click", function() {
+    var articleId = $(".article-id").text();
+    $(".close").click();
+    
+    $.ajax({
+      method: "POST",
+      url: `/articles/${articleId}`,
+      data: {
+        body: $("#comment-body").val()
+      }
+    })
+    // .then(function () {
+    // })
+    .catch(function(err) {
+      console.log(err);
+    })
+  });
+
+});
